@@ -8,8 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board")
 public class BoardController {
 	
-	@GetMapping("main")
+	@GetMapping("/main")
 	public String main() {
 		return "board/main";
+	}
+	
+	@GetMapping("/read")
+	public String read() {
+		return "board/read";
+	}
+	
+	@GetMapping("/write")
+	public String write() {
+		return "board/write";
+	}
+	
+	@GetMapping("/modify")
+	public String modify() {
+		return "board/modify";
+	}
+	
+	@GetMapping("/delete")
+	public String delete() {
+		return "board/delete";
 	}
 }

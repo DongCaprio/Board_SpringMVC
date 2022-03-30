@@ -25,31 +25,32 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form action="${root }user/login" method="get">
+					<form action="${root }board/read" method="get">
 						<div class="form-group">
-							<label for="user_name">이름</label>
-							<input type="text" id="user_name" name="user_name" class="form-control"/>
+							<label for="board_writer_name">작성자</label>
+							<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="홍길동" disabled="disabled"/>
 						</div>
 						<div class="form-group">
-							<label for="user_id">아이디</label>
-							<div class="input-group">
-								<input type="text" id="user_id" name="user_id" class="form-control"/>
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary">중복확인</button>
-								</div>
-							</div>
+							<label for="board_date">작성날짜</label>
+							<input type="text" id="board_date" name="board_date" class="form-control" value="2018-7-20" disabled="disabled"/>
 						</div>
 						<div class="form-group">
-							<label for="user_pw">비밀번호</label>
-							<input type="password" id="user_pw" name="user_pw" class="form-control"/>
+							<label for="board_subject">제목</label>
+							<input type="text" id="board_subject" name="board_subject" class="form-control" value="제목입니다"/>
 						</div>
 						<div class="form-group">
-							<label for="user_pw2">비밀번호 확인</label>
-							<input type="password" id="user_pw2" name="user_pw2" class="form-control"/>
+							<label for="board_content">내용</label>
+							<textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
+						</div>
+						<div class="form-group">
+							<label for="board_file">첨부 이미지</label>
+							<img src="${root }image/logo.png" width="100%"/>	
+							<input type="file" name="board_file" id="board_file" class="form-control" accept="image/*"/>					
 						</div>
 						<div class="form-group">
 							<div class="text-right">
-								<button type="submit" class="btn btn-primary">회원가입</button>
+								<button type="submit" class="btn btn-primary">수정완료</button>
+								<a href="${root }board/read" class="btn btn-info">취소</a>
 							</div>
 						</div>
 					</form>
@@ -59,17 +60,6 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-    
