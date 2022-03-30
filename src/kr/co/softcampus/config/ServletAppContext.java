@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import kr.co.softcampus.mapper.BoardMapper;
+import kr.co.softcampus.mapper.BoardMapper; 
 
 //Spring MVC 프로젝트에 관련된 설정을 하는 클래스
 @Configuration
