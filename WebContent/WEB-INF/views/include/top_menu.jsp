@@ -11,18 +11,13 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navMenu">
 		<ul class="navbar-nav">
+		<%--TopMenuInterceptor.java에서 리퀘스트영역에 topMenuList를 담아서 보냄 --%>
+		<c:forEach var="obj" items="${topMenuList }">
 			<li class="nav-item">
-				<a href="${root }board/main" class="nav-link">자유게시판</a>
+		<%--board_info_idx가 있어야지만 어느 게시판인지 알 수 있으므로 지정해준다 --%>
+				<a href="${root }board/main?board_info_idx=${obj.board_info_idx}" class="nav-link">${obj.board_info_name }</a>
 			</li>
-			<li class="nav-item">
-				<a href="${root }board/main" class="nav-link">유머게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="${root }board/main" class="nav-link">정치게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="${root }board/main" class="nav-link">스포츠게시판</a>
-			</li>
+		</c:forEach>
 		</ul>
 		
 		<ul class="navbar-nav ml-auto">
