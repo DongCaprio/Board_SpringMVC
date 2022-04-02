@@ -23,9 +23,7 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 	public TopMenuInterceptor(TopMenuService topMenuService) {
 		this.topMenuService = topMenuService;
 	}
-
-
-
+	
 	@Override
 	// preHandle 메세지를 통해서 모든 곳에서 반응할 수 있도록 해줌(인터셉터 기능 중 하나)
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -37,5 +35,4 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 		//다음단계로 나아갈 수 있도록 preHandle return을 true로 지정해준다
 		return true;
 	}
-	
 }
