@@ -23,7 +23,7 @@ public class UserValidator implements Validator {
 		
 		if(userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
 			errors.rejectValue("user_pw", "NotEquals");
-			errors.rejectValue("user_pw2", "NotEquals");
+			errors.rejectValue("user_pw2", "NotEquals2");
 		}
 	}
 }

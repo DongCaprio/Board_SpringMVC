@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import kr.co.softcampus.Interceptor.TopMenuInterceptor;
 import kr.co.softcampus.mapper.BoardMapper;
 import kr.co.softcampus.mapper.TopMenuMapper;
+import kr.co.softcampus.mapper.UserMapper;
 import kr.co.softcampus.service.TopMenuService; 
 
 //Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -101,6 +102,15 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Bean
 	public MapperFactoryBean<TopMenuMapper> getTopMenuMapper(SqlSessionFactory factory) throws Exception{
 		MapperFactoryBean<TopMenuMapper> factoryBean = new MapperFactoryBean<TopMenuMapper>(TopMenuMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		return factoryBean;
+	}
+	
+	//이것은 바로 위의 Bean과 동일하게 작성해준다
+	//바뀌는 것은 <>안에 있는 Mapper의 타입만 바꿔서 작성해주자
+	@Bean
+	public MapperFactoryBean<UserMapper> getUserMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
 		factoryBean.setSqlSessionFactory(factory);
 		return factoryBean;
 	}
