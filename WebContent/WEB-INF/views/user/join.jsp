@@ -29,12 +29,18 @@
 			dataType : 'text',
 			success : function(result) {
 				if(result.trim() == 'true'){
-					alert('사용할 수 있는 아이디입니다.')	
+					alert('사용할 수 있는 아이디입니다.')
+					$("#userIdExist").val('true')
 				} else{
 					alert('사용할 수 없는 아이디입니다.')
+					$("#userIdExist").val('false')
 				}
 			}
 		})
+	}
+	
+	function resetUserIdExist() {
+		$('#userIdExist').val('false')
 	}
 </script>
 <body>
@@ -48,6 +54,7 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<form:form action="${root }user/join_pro" method='post' modelAttribute="joinUserBean">
+						<form:hidden path="userIdExist"/>
 						<div class="form-group">
 							<form:label path="user_name">이름</form:label>
 							<form:input path="user_name" class='form-control'/>
@@ -56,7 +63,7 @@
 						<div class="form-group">
 							<form:label path="user_id">아이디</form:label>
 							<div class="input-group">
-								<form:input path="user_id" class='form-control'/>
+								<form:input path="user_id" class='form-control' onkeypress="resetUserIdExist()"/>
 								<div class="input-group-append">
 									<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
 								</div>
