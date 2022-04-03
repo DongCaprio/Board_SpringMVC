@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -114,6 +116,23 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		//모든 요청주소에 반응하도록 /** 으로 경로를 쳐준다
 		reg1.addPathPatterns("/**");
+	}
+	
+	//밑의 @Beann ReloadableResourceBundleMessageSource를 위해서 설정하는것
+	//위에 이미 db를 위한 properties파일을 어노테이션 설정했는데 또 밑에처럼 properties파일을 설정하면 에러 발생함
+	//이렇게 2개 이상의 어노테이션을 사용할때는 지금의 @Bean을 선언해주면 2개를 사용할 수 있다.
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	//에러 어노테이션을 위한 설정
+	//@Vaild 등을 사용하려면 밑에 메소드를 선언해야 한다.
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+		res.setBasenames("/WEB-INF/properties/error_message");
+		return res;
 	}
 	
 }
