@@ -19,14 +19,21 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
-		UserBean userBean = (UserBean)target;
-		
-		if(userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
-			errors.rejectValue("user_pw", "NotEquals");
-			errors.rejectValue("user_pw2", "NotEquals2");
-		}
-		if(userBean.isUserIdExist() == false) {
-			errors.rejectValue("user_id", "DontCheckUserIdExist");
+		UserBean userBean = (UserBean) target;
+
+		//밑에 if문을 쓰기위해서 추가해준다.
+		//에러 오브젝트명을 얻어서 분기해줘야지만 에러를 피할수 있다.
+		//51강 24분 이해 어려움
+		String beanName = errors.getObjectName();
+
+		if (beanName.equals("joinUserBean")) {
+			if (userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
+				errors.rejectValue("user_pw", "NotEquals");
+				errors.rejectValue("user_pw2", "NotEquals2");
+			}
+			if (userBean.isUserIdExist() == false) {
+				errors.rejectValue("user_id", "DontCheckUserIdExist");
+			}
 		}
 	}
 }
