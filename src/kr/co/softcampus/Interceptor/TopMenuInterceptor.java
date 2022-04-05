@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import kr.co.softcampus.beans.BoardInfoBean;
+import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.service.TopMenuService;
 
 //모든 곳에서 탑메뉴를 써야하므로 HandlerInterceptor를 implements 해준다
@@ -18,10 +19,12 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 	//인터셉터에서는 자동주입을 통해 Bean을 주입받지 못한다
 	//때문에 객체사용시 여기서 Bean주입말고 생성자를 통해 Bean을 주입해주자
 	private TopMenuService topMenuService;
+	private UserBean loginUserBean;
 	
 	//@Autowired 이거없어도 생성자 하나면 자동으로 Autowired된다.
-	public TopMenuInterceptor(TopMenuService topMenuService) {
+	public TopMenuInterceptor(TopMenuService topMenuService, UserBean loginUserBean) {
 		this.topMenuService = topMenuService;
+		this.loginUserBean = loginUserBean;
 	}
 	
 	@Override
@@ -32,6 +35,7 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 		List<BoardInfoBean> topMenuList = topMenuService.getTopMenuList();
 		//리퀘스트 영역에 들어가게 지정해줌
 		request.setAttribute("topMenuList", topMenuList);
+		request.setAttribute("loginUserBean", loginUserBean);
 		//다음단계로 나아갈 수 있도록 preHandle return을 true로 지정해준다
 		return true;
 	}

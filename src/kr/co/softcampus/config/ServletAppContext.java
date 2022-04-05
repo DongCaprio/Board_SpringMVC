@@ -1,5 +1,7 @@
 package kr.co.softcampus.config;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.softcampus.Interceptor.TopMenuInterceptor;
+import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.mapper.BoardMapper;
 import kr.co.softcampus.mapper.TopMenuMapper;
 import kr.co.softcampus.mapper.UserMapper;
@@ -52,6 +55,10 @@ public class ServletAppContext implements WebMvcConfigurer{
 	//여기서 생성한뒤에 topMenuservice를 이용해서 밑에 인터셉터를 사용해주자
 	@Autowired
 	private TopMenuService topMenuservice;
+	
+	//세션스코프에 있는 로그인유저 주입
+	@Resource(name = "loginUserBean")
+	private UserBean loginUserBean;
 	
 	// Contorller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
 	@Override
@@ -122,7 +129,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		//여기서부터 우리가 작성해야 하는 코드
 		//바로밑에줄 new의 괄호안에는 위에서 @Autowired받은것으로 인터셉터 @Autowired를 생성자로 해야하는 것에서부터 시작함
-		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuservice);
+		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuservice, loginUserBean);
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		//모든 요청주소에 반응하도록 /** 으로 경로를 쳐준다
 		reg1.addPathPatterns("/**");
