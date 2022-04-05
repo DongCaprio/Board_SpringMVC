@@ -79,6 +79,13 @@ public class UserController {
 		return "user/logout";
 	}
 	
+	@GetMapping("/not_login")
+	public String not_login() {
+		return "user/not_login";
+	}
+	
+	
+	
 	//내가만든 Vaildator를 사용하기 위해서 사용
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

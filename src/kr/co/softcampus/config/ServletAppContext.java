@@ -21,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.softcampus.Interceptor.CheckLoginInterceptor;
 import kr.co.softcampus.Interceptor.TopMenuInterceptor;
 import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.mapper.BoardMapper;
@@ -133,6 +134,12 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		//모든 요청주소에 반응하도록 /** 으로 경로를 쳐준다
 		reg1.addPathPatterns("/**");
+		
+		//로그인이 안된 상태에서 접근하면 로그인관련것들 접근하지 못하게 처리
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
+		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
+		reg2.addPathPatterns("/user/modify","/user/logout", "/board/*");
+		reg2.excludePathPatterns("/board/main");
 	}
 	
 	//밑의 @Beann ReloadableResourceBundleMessageSource를 위해서 설정하는것
