@@ -20,4 +20,9 @@ public interface UserMapper {
 			+ "from user_table "
 			+ "where user_id = #{user_id} and user_pw = #{user_pw}")
 	UserBean getLoginUserInfo(UserBean tempLoginUserBean);
+	
+	@Select("select user_id, user_name "
+			+ "from user_table "
+			+ "where user_idx = ${user_idx}")
+	UserBean getModifyUserInfo(int user_idx);
 }

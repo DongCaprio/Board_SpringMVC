@@ -70,9 +70,9 @@ public class UserController {
 	
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyUserBean") UserBean modifyUserBean) {
-		modifyUserBean.setUser_id(loginUserBean.getUser_id());
-		modifyUserBean.setUser_name(loginUserBean.getUser_name());
-		modifyUserBean.setUser_pw("11");
+		
+		userService.getModifyUserInfo(modifyUserBean);
+		
 		return "user/modify";
 	}
 	
