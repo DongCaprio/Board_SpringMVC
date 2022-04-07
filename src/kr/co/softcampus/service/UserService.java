@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.dao.UserDao;
+import kr.co.softcampus.mapper.UserMapper;
 
 @Service
 public class UserService {
@@ -47,6 +48,11 @@ public class UserService {
 		modifyUserBean.setUser_name(tempModifyUserBean.getUser_name());
 		//위아래 구분 
 		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+	}
+	
+	public void modifyUserInfo(UserBean modifyUserBean) {
+		//modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+		userDao.modifyUserInfo(modifyUserBean);
 	}
 	
 	

@@ -76,6 +76,16 @@ public class UserController {
 		return "user/modify";
 	}
 	
+	@PostMapping("/modify_pro")
+	public String modify_pro(@Valid @ModelAttribute("modifyUserBean") UserBean modifyUserBean, BindingResult result) {
+	//여기서 @Valid는 기본으로 설정해준 UserBean.java와 연동되어있다.
+		if(result.hasErrors()) {
+			return "user/modify";
+		}
+		userService.modifyUserInfo(modifyUserBean);
+		return "user/modify_success";
+	}
+	
 	@GetMapping("logout")
 	public String logout() {
 		loginUserBean.setUserLogin(false);
@@ -86,7 +96,6 @@ public class UserController {
 	public String not_login() {
 		return "user/not_login";
 	}
-	
 	
 	
 	//내가만든 Vaildator를 사용하기 위해서 사용

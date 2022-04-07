@@ -16,7 +16,7 @@ public class HomeController {
 	
 	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String home() {
-		System.out.println(loginUserBean);
+//		System.out.println(loginUserBean);
 		return "redirect:/main";
 	}
 }
