@@ -34,8 +34,10 @@ public class BoardController {
 	}
 
 	@GetMapping("/write")
-	public String write(@ModelAttribute("writeContentBean") ContentBean writeContentBean) {
-
+	public String write(@ModelAttribute("writeContentBean") ContentBean writeContentBean,
+						@RequestParam("board_info_idx")int board_info_idx) {
+		
+		writeContentBean.setContent_board_idx(board_info_idx);
 		return "board/write";
 	}
 
