@@ -44,12 +44,12 @@ public class BoardController {
 
 	@GetMapping("/read")
 	public String read(@RequestParam("board_info_idx")int board_info_idx,
-						@RequestParam("content_idx") int content_idx,
+						@RequestParam("content_idx")int content_idx,
 						Model model) {
-		model.addAttribute("board_info_idx", board_info_idx);
-		model.addAttribute("content_idx", content_idx);
 		
 		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+		model.addAttribute("content_idx", content_idx);
+		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("readContentBean", readContentBean);
 		
 		model.addAttribute("loginUserBean", loginUserBean);
@@ -62,6 +62,7 @@ public class BoardController {
 			@RequestParam("board_info_idx") int board_info_idx) {
 
 		writeContentBean.setContent_board_idx(board_info_idx);
+		writeContentBean.setContent_writer_idx(loginUserBean.getUser_idx());
 		return "board/write";
 	}
 
