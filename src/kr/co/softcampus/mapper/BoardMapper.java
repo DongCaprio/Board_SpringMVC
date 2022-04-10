@@ -1,6 +1,7 @@
 package kr.co.softcampus.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import kr.co.softcampus.beans.ContentBean;
 
@@ -13,4 +14,9 @@ public interface BoardMapper {
 	//위에보면 content_type에 jdbcType=VARCHAR 가 있는데 db상에서 null을 허용해도 마이바티스에서 거부가 되어
 	//꼭 저것을 추가해주어야지 null값을 정상적으로 처리할 수 있다.
 	void addContentInfo(ContentBean writeContentBean);
+	
+	@Select("select board_info_name "
+			+ "from board_info_table "
+			+ "where board_info_idx = #{board_info_idx}")
+	String getBoardInfoName(int board_info_idx);
 }

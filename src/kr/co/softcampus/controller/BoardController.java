@@ -18,13 +18,17 @@ import kr.co.softcampus.service.BoardService;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
+
 	@Autowired
 	private BoardService boardService;
 
 	@GetMapping("/main")
 	public String main(@RequestParam("board_info_idx") int board_info_idx, Model model) {
 		model.addAttribute("board_info_idx", board_info_idx);
+
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName", boardInfoName);
+
 		return "board/main";
 	}
 
@@ -35,8 +39,8 @@ public class BoardController {
 
 	@GetMapping("/write")
 	public String write(@ModelAttribute("writeContentBean") ContentBean writeContentBean,
-						@RequestParam("board_info_idx")int board_info_idx) {
-		
+			@RequestParam("board_info_idx") int board_info_idx) {
+
 		writeContentBean.setContent_board_idx(board_info_idx);
 		return "board/write";
 	}
@@ -47,7 +51,7 @@ public class BoardController {
 		if (result.hasErrors()) {
 			return "board/write";
 		}
-		
+
 		boardService.addContentInfo(writeContentBean);
 		return "board/write_success";
 	}

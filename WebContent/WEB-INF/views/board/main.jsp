@@ -22,7 +22,7 @@
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
 		<div class="card-body">
-			<h4 class="card-title">게시판 이름</h4>
+			<h4 class="card-title">${boardInfoName }</h4>
 			<table class="table table-hover" id='board_list'>
 				<thead>
 					<tr>
