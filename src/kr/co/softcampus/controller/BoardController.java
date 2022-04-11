@@ -48,6 +48,7 @@ public class BoardController {
 						Model model) {
 		
 		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+		System.out.println(readContentBean.getContent_writer_idx());
 		model.addAttribute("content_idx", content_idx);
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("readContentBean", readContentBean);
