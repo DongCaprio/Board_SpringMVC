@@ -48,7 +48,9 @@ public class BoardController {
 						Model model) {
 		
 		ContentBean readContentBean = boardService.getContentInfo(content_idx);
+		System.out.println(content_idx);
 		System.out.println(readContentBean.getContent_writer_idx());
+		
 		model.addAttribute("content_idx", content_idx);
 		model.addAttribute("board_info_idx", board_info_idx);
 		model.addAttribute("readContentBean", readContentBean);
@@ -86,6 +88,11 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete() {
 		return "board/delete";
+	}
+	
+	@GetMapping("/not_writer")
+	public String not_writer() {
+		return "board/not_writer";
 	}
 
 }

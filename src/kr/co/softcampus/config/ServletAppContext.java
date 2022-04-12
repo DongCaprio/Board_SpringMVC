@@ -23,11 +23,13 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.softcampus.Interceptor.CheckLoginInterceptor;
+import kr.co.softcampus.Interceptor.CheckWriterInterceptor;
 import kr.co.softcampus.Interceptor.TopMenuInterceptor;
 import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.mapper.BoardMapper;
 import kr.co.softcampus.mapper.TopMenuMapper;
 import kr.co.softcampus.mapper.UserMapper;
+import kr.co.softcampus.service.BoardService;
 import kr.co.softcampus.service.TopMenuService; 
 
 //Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -61,6 +63,10 @@ public class ServletAppContext implements WebMvcConfigurer{
 	//세션스코프에 있는 로그인유저 주입
 	@Resource(name = "loginUserBean")
 	private UserBean loginUserBean;
+	
+	//인터셉터 (내 글 아닌것에 수정삭제를 url를 통해 접근시에 사용)
+	@Autowired
+	private BoardService boardService;
 	
 	// Contorller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
 	@Override
@@ -141,6 +147,11 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
 		reg2.addPathPatterns("/user/modify","/user/logout", "/board/*");
 		reg2.excludePathPatterns("/board/main");
+
+		//내글 아닌글에 주소창으로 삭제 수정에 접근시에 발동함
+		CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService);
+		InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
+		reg3.addPathPatterns("/board/modify", "/board/delete");
 	}
 	
 	//밑의 @Beann ReloadableResourceBundleMessageSource를 위해서 설정하는것
