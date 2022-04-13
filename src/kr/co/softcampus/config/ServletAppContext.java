@@ -147,7 +147,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
 		reg2.addPathPatterns("/user/modify","/user/logout", "/board/*");
 		reg2.excludePathPatterns("/board/main");
-
+ 
 		//내글 아닌글에 주소창으로 삭제 수정에 접근시에 발동함
 		CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService);
 		InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
