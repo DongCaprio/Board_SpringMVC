@@ -69,4 +69,8 @@ public class BoardService {
 		boardDao.modifyContentInfo(modifyContentBean);
 	}
 	
+	public void deleteContentInfo(int content_idx) {
+		boardDao.deleteContentInfo(content_idx);
+	}
+	
 }
