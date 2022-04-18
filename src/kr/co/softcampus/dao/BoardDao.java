@@ -9,15 +9,13 @@ import kr.co.softcampus.beans.ContentBean;
 import kr.co.softcampus.mapper.BoardMapper;
 
 @Repository
-public class BoardDao {
+public class BoardDao { 
 
 	@Autowired
 	private BoardMapper boardMapper;
 
 	public void addContentInfo(ContentBean writeContentBean) {
-		for(int i =0;i<100;i++) {
 		boardMapper.addContentInfo(writeContentBean);
-		}
 	}
 	
 	public String getBoardInfoName(int board_info_idx) {
