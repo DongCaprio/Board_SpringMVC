@@ -38,4 +38,8 @@ public class BoardDao {
 	public void deleteContentInfo(int content_idx) {
 		boardMapper.deleteContentInfo(content_idx);
 	}
+	
+	public int getContentCnt(int content_board_idx) {
+		return boardMapper.getContentCnt(content_board_idx);
+	}
 }
