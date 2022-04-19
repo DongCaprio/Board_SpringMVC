@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -22,6 +23,9 @@ public class BoardService {
 
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Value("${page.listcnt}")
+	private int page_listcnt;
 
 	@Autowired
 	private BoardDao boardDao;
@@ -53,8 +57,13 @@ public class BoardService {
 		return boardDao.getBoardInfoName(board_info_idx);
 	}
 	
-	public List<ContentBean> getContentList(int board_info_idx){
-		return boardDao.getContentList(board_info_idx);
+	public List<ContentBean> getContentList(int board_info_idx, int page){
+		
+		int start = (page -1) * page_listcnt;
+		//페이지 구현하기(page가 1이면 0~10, 2면 11부터 20 이런식으로 된다)
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		
+		return boardDao.getContentList(board_info_idx, rowBounds);
 	}
 	
 	public ContentBean getContentInfo(int content_idx) {

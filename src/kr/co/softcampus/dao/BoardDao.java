@@ -2,6 +2,7 @@ package kr.co.softcampus.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +23,8 @@ public class BoardDao {
 		return boardMapper.getBoardInfoName(board_info_idx);
 	}
 	
-	public List<ContentBean> getContentList(int board_info_idx){
-		return boardMapper.getContentList(board_info_idx);
+	public List<ContentBean> getContentList(int board_info_idx, RowBounds rowBounds){
+		return boardMapper.getContentList(board_info_idx, rowBounds);
 	}
 	
 	public ContentBean getContentInfo(int content_idx) {
